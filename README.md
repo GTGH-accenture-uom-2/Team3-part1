@@ -63,7 +63,7 @@ git add .
 ### 2.Commit the Changes
 After staging the changes, you need to commit them with a message describing what you've changed. Good commit messages are crucial for collaborative work as they provide context to others about what the changes do.
  ```bash
-git add .
+git commit -m "Describe the changes you've made"
 ```
 
 ### 3.Push Your Commit to GitHub
