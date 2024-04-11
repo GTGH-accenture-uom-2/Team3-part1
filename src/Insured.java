@@ -1,21 +1,32 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Random;
 
 public class Insured {
     private int afm;
-    private int amka;
+    private long amka;
     private String name;
     private String surname;
     private isEmail email;
     private LocalDate birthdate;
 
-    public Insured(int afm,int amka,String name,String surname,isEmail email,LocalDate birthdate){
+    public Insured(int afm,String name,String surname,isEmail email,LocalDate birthdate){
         this.afm = afm;
-        this.amka = amka;
+        this.amka = generateAmka(birthdate);
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.birthdate = birthdate;
+    }
+
+    private long generateAmka(LocalDate birthdate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyy");
+        String birthdateStr = birthdate.format(formatter);
+        Random random = new Random();
+        int randomFiveDigits = random.nextInt(100000);
+        String amka = birthdateStr + String.format("%05d", randomFiveDigits);
+        return Long.parseLong(amka);
     }
 
     @Override
@@ -38,11 +49,11 @@ public class Insured {
         this.afm = afm;
     }
 
-    public int getAmka() {
+    public long getAmka() {
         return amka;
     }
 
-    public void setAmka(int amka) {
+    public void setAmka(long amka) {
         this.amka = amka;
     }
 
@@ -76,5 +87,6 @@ public class Insured {
 
     public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
+        this.amka = generateAmka(birthdate);
     }
 }

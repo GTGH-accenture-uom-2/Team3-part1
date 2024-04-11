@@ -23,7 +23,7 @@ public class TimeSlot {
                 "date=" + date +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", doctor=" + (doctor != null ? doctor.getName() : "None") +
+//                ", doctor=" + (doctor != null ? doctor.getName() : "None") +
                 '}';
     }
 }
