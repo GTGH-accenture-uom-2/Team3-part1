@@ -6,29 +6,43 @@ import java.util.Map;
 public class Reservation {
     private Insured insured;
     private Timeslot timeslot;
-    private Map<Insured,Timeslot> reservations=new HashMap<>();
+    private VaccinationCenter vacCenter;
+    private Map<Insured,Timeslot> reservations;
 
-    public Reservation(Insured insured, Timeslot timeslot) {
+    public Reservation(Insured insured, Timeslot timeslot,VaccinationCenter vacCenter) {
         this.insured = insured;
         this.timeslot = timeslot;
+        reservations=new HashMap<>();
     }
-    public void setReservation(Insured insured, Timeslot timeslot){
-        if(timeslot.isAvailable()){
+    public void printAvailableSlots(VaccinationCenter vacCenter){
+
+    }
+    public void setReservation(Insured insured, Timeslot timeslot,VaccinationCenter vacCenter){
+        if(vacCenter.isAvailable(timeslot)){
             reservations.put(insured,timeslot);
-            timeslot.isAvailable()=false;
+            vacCenter.isAvailable(timeslot);
         }
+        else System.out.println("The timeslot is not available!");
 
     }
-    public void changeReservation(Insured insured,Timeslot timeslot){
+    public void changeReservation(Insured insured,Timeslot timeslot,VaccinationCenter vacCenter){
         if(reservations.containsKey(insured)){
-            setReservation(insured,timeslot);
+            setReservation(insured,timeslot,vacCenter);
         }
 
     }
-    public void printReservations(HashMap reservations){
+    public void printReservations(Map reservations){
         reservations.forEach((insured,timeslot)->
             System.out.println(insured + " : "+ timeslot));
 
+    }
+
+    public VaccinationCenter getVacCenter() {
+        return vacCenter;
+    }
+
+    public Map<Insured, Timeslot> getReservations() {
+        return reservations;
     }
 
     public Insured getInsured() {
