@@ -1,3 +1,4 @@
+import java.sql.Time;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.Month;
@@ -18,7 +19,6 @@ public class VaccinationCenter {
     //tha to spasw se mikroteres synarthseis
     public void setDayTimeslots(Doctor firstDoctor, Doctor secondDoctor){
         LocalDate currentDate = LocalDate.now();
-        System.out.println(currentDate);
         int day = currentDate.getDayOfMonth();
         int count = 0 ;
         for(int hour = OPEN_AT ; hour < CLOSE_AT ; hour ++){
@@ -35,7 +35,7 @@ public class VaccinationCenter {
                 }else{
                     if(minutes + DURATION  == 60){
                         Timeslot timeslot = new Timeslot(day,currentDate.getMonthValue(),currentDate.getYear(),hour,minutes,hour + 1,0,secondDoctor);
-                        timeslots.put(timeslot,false);
+                        timeslots.put(timeslot,true);
                         break;
                     }
                     Timeslot timeslot = new Timeslot(day,currentDate.getMonthValue(),currentDate.getYear(),hour,minutes,hour,minutes + DURATION,secondDoctor);
@@ -44,6 +44,17 @@ public class VaccinationCenter {
             }
         }
     }
+    public boolean isAvaillable(Timeslot timeslot){
+        Set<Timeslot> slots = timeslots.keySet();
+
+        for(Timeslot aslot : slots){
+            if(aslot.equals(timeslot)){
+                if(!timeslots.get(aslot))
+                    return true;
+            }
+        }
+        return false;
+    }
     public void perMonthTimeslots(){
         //for(int day=currentDate.getDayOfMonth();day <= currentDate.lengthOfMonth() ;day++){ } //per month
         //...
@@ -51,7 +62,7 @@ public class VaccinationCenter {
     public void printTimeslots(){
         for(Timeslot slot : timeslots.keySet()){
             System.out.println(slot);
-            System.out.println(timeslots.get(slot));
+            System.out.println("Appointment : " + timeslots.get(slot));
         }
     }
 

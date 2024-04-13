@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
+
         List<String> greekNames = Arrays.asList("Nikos", "Yiannis", "Kostas", "Maria", "Eleni", "Dimitris", "Alexandra", "Vasiliki", "Georgios", "Panagiotis");
         List<String> greekSurnames = Arrays.asList("Papadopoulos", "Nikolaidou", "Kostas", "Dimitriou", "Vasileiou", "Bozatzidou", "Alexaidou", "Giorgiou", "Stamatakis", "Antonopoulos");
 
@@ -28,9 +29,26 @@ public class Main {
 
             insuredList.add(new Insured(afm, amka, name, surname, new EmailValidator(email), birthdate));
         }
-
+        /*
         for (Insured insured : insuredList) {
             System.out.println(insured);
+        }
+         */
+
+        VaccinationCenter firstCenter = new VaccinationCenter("1234","Psaron2");
+        VaccinationCenter secondCenter = new VaccinationCenter("5678", "Ipokratio");
+
+        Doctor doctor1 = new Doctor("166803245", "Nikos", "Papadopoulos");
+        Doctor doctor2 = new Doctor("166803323", "Maria", "Dimitriou");
+
+        firstCenter.setDayTimeslots(doctor1,doctor2);
+        //firstCenter.printTimeslots();
+
+        Timeslot time = new Timeslot(13,4,2024,13,0,13,30,doctor2);
+        if(firstCenter.isAvaillable(time)){
+            System.out.println("Available");
+        }else{
+            System.out.println("Not Availlable");
         }
     }
 
