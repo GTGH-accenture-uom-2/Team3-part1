@@ -1,4 +1,3 @@
-import java.sql.Time;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.Month;
@@ -15,7 +14,21 @@ public class VaccinationCenter {
         this.address = address;
         timeslots = new HashMap<>();
     }
+    public HashMap<Timeslot, Boolean> getTimeslots() {
+        return timeslots;
+    }
 
+    public void setTimeslots(HashMap<Timeslot, Boolean> timeslots) {
+        this.timeslots = timeslots;
+    }
+    public void makeReservation(Timeslot timeslot){
+        Set<Timeslot> slots = timeslots.keySet();
+        for(Timeslot aslot : slots){
+            if(aslot.equals(timeslot)){
+                timeslots.replace(aslot,false);
+            }
+        }
+    }
     //tha to spasw se mikroteres synarthseis
     public void setDayTimeslots(Doctor firstDoctor, Doctor secondDoctor){
         LocalDate currentDate = LocalDate.now();
@@ -27,11 +40,11 @@ public class VaccinationCenter {
                 if(count <= 5){
                     if(minutes + DURATION  == 60){
                         Timeslot timeslot = new Timeslot(day,currentDate.getMonthValue(),currentDate.getYear(),hour,minutes,hour + 1,0,firstDoctor);
-                        timeslots.put(timeslot,false);
+                        timeslots.put(timeslot,true);
                         break;
                     }
                     Timeslot timeslot = new Timeslot(day,currentDate.getMonthValue(),currentDate.getYear(),hour,minutes,hour,minutes + DURATION,firstDoctor);
-                    timeslots.put(timeslot,false);
+                    timeslots.put(timeslot,true);
                 }else{
                     if(minutes + DURATION  == 60){
                         Timeslot timeslot = new Timeslot(day,currentDate.getMonthValue(),currentDate.getYear(),hour,minutes,hour + 1,0,secondDoctor);
@@ -39,22 +52,23 @@ public class VaccinationCenter {
                         break;
                     }
                     Timeslot timeslot = new Timeslot(day,currentDate.getMonthValue(),currentDate.getYear(),hour,minutes,hour,minutes + DURATION,secondDoctor);
-                    timeslots.put(timeslot,false);
+                    timeslots.put(timeslot,true);
                 }
             }
         }
     }
-    public boolean isAvaillable(Timeslot timeslot){
+    public boolean isAvailable(Timeslot timeslot){
         Set<Timeslot> slots = timeslots.keySet();
 
         for(Timeslot aslot : slots){
             if(aslot.equals(timeslot)){
-                if(!timeslots.get(aslot))
+                if(timeslots.get(aslot))
                     return true;
             }
         }
         return false;
     }
+
     public void perMonthTimeslots(){
         //for(int day=currentDate.getDayOfMonth();day <= currentDate.lengthOfMonth() ;day++){ } //per month
         //...

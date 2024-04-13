@@ -44,12 +44,24 @@ public class Main {
         firstCenter.setDayTimeslots(doctor1,doctor2);
         //firstCenter.printTimeslots();
 
+
+        /*
+        //elegxos gia thn allagh sto hashMap tou VaccinationCenter
         Timeslot time = new Timeslot(13,4,2024,13,0,13,30,doctor2);
-        if(firstCenter.isAvaillable(time)){
+        if(!firstCenter.isAvailable(time)){
+            System.out.println("Available");
+        }else{
+            System.out.println("Not Availlable");
+            firstCenter.makeReservation(time);
+        }
+        firstCenter.printTimeslots();
+        if(!firstCenter.isAvailable(time)){
             System.out.println("Available");
         }else{
             System.out.println("Not Availlable");
         }
+         */
+
     }
 
     private static String generateAmka(LocalDate birthdate) {
