@@ -40,10 +40,13 @@ public class Main {
 
         Doctor doctor1 = new Doctor("166803245", "Nikos", "Papadopoulos");
         Doctor doctor2 = new Doctor("166803323", "Maria", "Dimitriou");
+        Doctor doctor3 = new Doctor("166803123", "Kostas", "Papanikolaou");
+        Doctor doctor4 = new Doctor("166803789", "Anna", "Iwannou");
 
-        firstCenter.setDayTimeslots(doctor1,doctor2);
+        firstCenter.setDailyTimeslots(doctor1,doctor2);
+        secondCenter.setDailyTimeslots(doctor3,doctor4);
         //firstCenter.printTimeslots();
-
+        //secondCenter.printTimeslots();
 
         /*
         //elegxos gia thn allagh sto hashMap tou VaccinationCenter
