@@ -6,8 +6,7 @@ public class VaccinationCenter {
     private String code;
     private String address;
     private LinkedHashMap<Timeslot, Boolean> timeslots;
-    //private static final int OPEN_AT = 10;
-    //private static final int CLOSE_AT = 15;
+    //private HashMap<Timeslot, Boolean> timeslots;
     private static final LocalTime OPENS_AT = LocalTime.of(10,0);
     private static final LocalTime CLOSE_AT = LocalTime.of(15,0);
     private static final int DURATION = 30; //minutes
@@ -17,6 +16,7 @@ public class VaccinationCenter {
         this.code = code;
         this.address = address;
         timeslots = new LinkedHashMap<>();
+        //timeslots = new HashMap<>();
     }
     public HashMap<Timeslot, Boolean> getTimeslots() {
         return timeslots;
@@ -26,6 +26,14 @@ public class VaccinationCenter {
         for(Timeslot aslot : slots){
             if(aslot.equals(timeslot)){
                 timeslots.replace(aslot,false);
+            }
+        }
+    }
+    public void changeTheReservation(Timeslot timeslot){
+        Set<Timeslot> slots = timeslots.keySet();
+        for(Timeslot aslot : slots){
+            if(aslot.equals(timeslot)){
+                timeslots.replace(aslot,true);
             }
         }
     }
@@ -43,8 +51,8 @@ public class VaccinationCenter {
         }
     }
     public boolean isAvailable(Timeslot timeslot){
-        Set<Timeslot> slots = timeslots.keySet();
 
+        Set<Timeslot> slots = timeslots.keySet();
         for(Timeslot aslot : slots){
             if(aslot.equals(timeslot)){
                 if(timeslots.get(aslot))

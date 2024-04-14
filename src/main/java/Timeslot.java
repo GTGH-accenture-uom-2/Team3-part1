@@ -25,17 +25,14 @@ public class Timeslot {
     }
 
     public boolean equals(Object obj){
-        //deixnoun stin idia thesi mnhmhs tote true
         if(this == obj){
             return true;
         }
-        // einai antikeimeno typou Timeslot
         if(!(obj instanceof Timeslot)){
             return false;
         }
         Timeslot tslot = (Timeslot) obj; // type casting
         return date.equals(tslot.date) && startTime.equals(tslot.startTime) && endTime.equals(tslot.endTime) && doctor.equals(tslot.doctor);
-
     }
 
 }

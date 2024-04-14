@@ -48,22 +48,23 @@ public class Main {
         //firstCenter.printTimeslots();
         //secondCenter.printTimeslots();
 
-        /*
+
         //elegxos gia thn allagh sto hashMap tou VaccinationCenter
-        Timeslot time = new Timeslot(13,4,2024,13,0,13,30,doctor2);
-        if(!firstCenter.isAvailable(time)){
+        Timeslot time = new Timeslot(14,4,2024,13,0,13,30,doctor2);
+        System.out.println(time);
+        if(firstCenter.isAvailable(time)){
             System.out.println("Available");
+            firstCenter.makeReservation(time);
         }else{
             System.out.println("Not Availlable");
-            firstCenter.makeReservation(time);
+
         }
         firstCenter.printTimeslots();
-        if(!firstCenter.isAvailable(time)){
+        if(firstCenter.isAvailable(time)){
             System.out.println("Available");
-        }else{
+        }else {
             System.out.println("Not Availlable");
         }
-         */
 
     }
 
