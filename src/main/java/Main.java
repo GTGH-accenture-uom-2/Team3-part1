@@ -1,10 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -48,23 +45,22 @@ public class Main {
         //firstCenter.printTimeslots();
         //secondCenter.printTimeslots();
 
-
-        //elegxos gia thn allagh sto hashMap tou VaccinationCenter
+        Timeslot time2=new Timeslot(14,4,2024,14,0,14,30,doctor2);
         Timeslot time = new Timeslot(14,4,2024,13,0,13,30,doctor2);
-        System.out.println(time);
-        if(firstCenter.isAvailable(time)){
-            System.out.println("Available");
-            firstCenter.makeReservation(time);
-        }else{
-            System.out.println("Not Availlable");
 
-        }
-        firstCenter.printTimeslots();
-        if(firstCenter.isAvailable(time)){
-            System.out.println("Available");
-        }else {
-            System.out.println("Not Availlable");
-        }
+        List<Map> reservations=new ArrayList<>();
+        Reservation r1 = new Reservation(insuredList.get(0));
+        Reservation r2 = new Reservation(insuredList.get(1));
+
+        reservations.add(r1.setReservation(time,firstCenter));
+        //reservations.add(r2.setReservation(time,firstCenter));
+        //reservations.add(r1.setReservation(/*insuredList.get(0),*/time,firstCenter));
+        //reservations.add(r2.setReservation(insuredList.get(1),time,firstCenter));
+        r1.changeReservation(/*insuredList.get(0),*/time2,firstCenter);
+        r2.setReservation(time,firstCenter);
+
+        r1.printAvailableSlots(firstCenter);
+
 
     }
 

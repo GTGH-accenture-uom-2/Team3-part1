@@ -37,6 +37,12 @@ public class VaccinationCenter {
             }
         }
     }
+    public void printAvailableTimeslots(){
+        timeslots.forEach((key, value) -> {
+            if(value)
+                System.out.println( key + " Appointment: " + value);
+        });
+    }
     public void setDailyTimeslots(Doctor firstDoctor, Doctor secondDoctor){
         LocalDate currentDate = LocalDate.now();
         LocalTime time = OPENS_AT;
