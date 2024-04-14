@@ -9,6 +9,7 @@ public class Insured {
     private String surname;
     private EmailValidator email;
     private LocalDate birthdate;
+    private boolean isVaccinated = false;
 
     public Insured(String afm,String amka,String name,String surname,EmailValidator email,LocalDate birthdate){
         this.afm = new AFMValidator(afm);
@@ -18,6 +19,8 @@ public class Insured {
         if (email == null) {
             throw new IllegalArgumentException("Email validator cannot be null");
         }
+        NameSurnameValidator.validateNameOrSurname(name);
+        NameSurnameValidator.validateNameOrSurname(surname);
         this.amka = amka;
         this.name = name;
         this.surname = surname;
@@ -35,6 +38,7 @@ public class Insured {
                 "surname=" + surname + ",\n" +
                 "email=" + email.getEmailAddress() + ",\n" +
                 "birthdate=" + birthdate.format(formatter) + "\n" +
+                "isVaccinated=" + isVaccinated + "\n" +
                 '}';
     }
 
@@ -62,10 +66,12 @@ public class Insured {
     }
 
     public void setName(String name) {
+        NameSurnameValidator.validateNameOrSurname(name);
         this.name = name;
     }
 
     public String getSurname() {
+        NameSurnameValidator.validateNameOrSurname(surname);
         return surname;
     }
 
@@ -93,6 +99,14 @@ public class Insured {
             throw new IllegalArgumentException("AMKA does not match new birthdate");
         }
         this.birthdate = birthdate;
+    }
+
+    public void setVaccinated(boolean vaccinated) {
+        this.isVaccinated = vaccinated;
+    }
+
+    public boolean isVaccinated() {
+        return isVaccinated;
     }
 
 }
