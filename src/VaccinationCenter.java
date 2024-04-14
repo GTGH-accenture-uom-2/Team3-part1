@@ -44,7 +44,8 @@ public class VaccinationCenter {
             time = time.plusMinutes(DURATION);
         }
     }
-    /*public boolean isAvailable(Timeslot timeslot){
+
+    public boolean isAvailable(Timeslot timeslot){
         Set<Timeslot> slots = timeslots.keySet();
 
         for(Timeslot aslot : slots){
@@ -54,7 +55,7 @@ public class VaccinationCenter {
             }
         }
         return false;
-    }*/
+    }
 
     public void perMonthTimeslots(){
         //for(int day=currentDate.getDayOfMonth();day <= currentDate.lengthOfMonth() ;day++){ } //per month
@@ -76,11 +77,11 @@ public class VaccinationCenter {
     }
 
 
-    public boolean isAvailable(Timeslot timeslot) {
-        boolean available;
-        if(timeslots.get(timeslot)==null)
-            available=true;
-        else available=false;
-        return  available;
-    }
+//    public boolean isAvailable(Timeslot timeslot) {
+//        boolean available;
+//        if(timeslots.get(timeslot)==null)
+//            available=true;
+//        else available=false;
+//        return  available;
+//    }
 }

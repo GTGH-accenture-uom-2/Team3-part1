@@ -22,14 +22,14 @@ public class Reservation {
     }
 
     public Map<Insured, Timeslot> setReservation(Insured insured, Timeslot timeslot, VaccinationCenter vacCenter) {
-        Scanner setTimeslot=new Scanner(System.in);
+        //Scanner setTimeslot=new Scanner(System.in);
         printAvailableSlots(vacCenter);
         System.out.println("Choose a available timeslot");
 
         if (vacCenter.isAvailable(timeslot)) {
             reservations.put(insured, timeslot);
             vacCenter.makeReservation(timeslot);
-        } else System.out.println("The timeslot is not available!");
+        } else System.out.println("The timeslot is not available!?!?");
         return reservations;
     }
 
