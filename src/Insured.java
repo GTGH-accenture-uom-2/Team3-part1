@@ -1,16 +1,23 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Insured {
-    private int afm;
-    private int amka;
+    private AfmValidator afm;
+    private String amka;
     private String name;
     private String surname;
-    private isEmail email;
+    private EmailValidator email;
     private LocalDate birthdate;
 
-    public Insured(int afm,int amka,String name,String surname,isEmail email,LocalDate birthdate){
-        this.afm = afm;
+    public Insured(String afm,String amka,String name,String surname,EmailValidator email,LocalDate birthdate){
+        this.afm = new AfmValidator(afm);
+        if (!AmkaValidator.isValidAmka(amka, birthdate)) {
+            throw new IllegalArgumentException("Invalid AMKA");
+        }
+        if (email == null) {
+            throw new IllegalArgumentException("Email validator cannot be null");
+        }
         this.amka = amka;
         this.name = name;
         this.surname = surname;
@@ -20,29 +27,33 @@ public class Insured {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return "Insured {\n" +
                 "afm=" + afm + ",\n" +
                 "amka=" + amka + ",\n" +
                 "name=" + name + ",\n" +
                 "surname=" + surname + ",\n" +
                 "email=" + email.getEmailAddress() + ",\n" +
-                "birthdate=" + birthdate + "\n" +
+                "birthdate=" + birthdate.format(formatter) + "\n" +
                 '}';
     }
 
-    public int getAfm() {
-        return afm;
+    public String getAfm() {
+        return afm.getAfm();
     }
 
-    public void setAfm(int afm) {
-        this.afm = afm;
+    public void setAfm(String afm) {
+        this.afm = new AfmValidator(afm);
     }
 
-    public int getAmka() {
+    public String getAmka() {
         return amka;
     }
 
-    public void setAmka(int amka) {
+    public void setAmka(String amka) {
+        if (!AmkaValidator.isValidAmka(amka, this.birthdate)) {
+            throw new IllegalArgumentException("Invalid AMKA");
+        }
         this.amka = amka;
     }
 
@@ -62,11 +73,14 @@ public class Insured {
         this.surname = surname;
     }
 
-    public isEmail getEmail() {
+    public EmailValidator getEmail() {
         return email;
     }
 
-    public void setEmail(isEmail email) {
+    public void setEmail(EmailValidator email) {
+        if (email == null) {
+            throw new IllegalArgumentException("Email validator cannot be null");
+        }
         this.email = email;
     }
 
@@ -75,6 +89,10 @@ public class Insured {
     }
 
     public void setBirthdate(LocalDate birthdate) {
+        if (!AmkaValidator.isValidAmka(this.amka, birthdate)) {
+            throw new IllegalArgumentException("AMKA does not match new birthdate");
+        }
         this.birthdate = birthdate;
     }
+
 }
