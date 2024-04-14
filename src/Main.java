@@ -1,10 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -41,7 +38,7 @@ public class Main {
         Doctor doctor1 = new Doctor("166803245", "Nikos", "Papadopoulos");
         Doctor doctor2 = new Doctor("166803323", "Maria", "Dimitriou");
 
-        firstCenter.setDayTimeslots(doctor1,doctor2);
+        firstCenter.setDailyTimeslots(doctor1,doctor2);
         //firstCenter.printTimeslots();
 
         Timeslot time = new Timeslot(13,4,2024,13,0,13,30,doctor2);
@@ -51,18 +48,25 @@ public class Main {
             System.out.println("Not Available");
         }
 
+
+        List<Map> reservations=new ArrayList<>();
+
             Reservation r1 = new Reservation(insuredList.get(0),time,firstCenter);
-            Reservation r2 = new Reservation(insuredList.get(0),time,firstCenter);
-            Reservation r3 = new Reservation(insuredList.get(0),time,firstCenter);
-            Reservation r4 = new Reservation(insuredList.get(0),time,firstCenter);
-            Reservation r5 = new Reservation(insuredList.get(0),time,firstCenter);
-            Reservation r6 = new Reservation(insuredList.get(0),time,firstCenter);
-            Reservation r7 = new Reservation(insuredList.get(0),time,firstCenter);
-            Reservation r8 = new Reservation(insuredList.get(0),time,firstCenter);
+            Reservation r2 = new Reservation(insuredList.get(1),time,firstCenter);
+            /*Reservation r3 = new Reservation(insuredList.get(2),time,firstCenter);
+            Reservation r4 = new Reservation(insuredList.get(3),time,firstCenter);
+            Reservation r5 = new Reservation(insuredList.get(4),time,firstCenter);
+            Reservation r6 = new Reservation(insuredList.get(5),time,firstCenter);
+            Reservation r7 = new Reservation(insuredList.get(6),time,firstCenter);
+            Reservation r8 = new Reservation(insuredList.get(7),time,firstCenter);*/
             Timeslot time2=new Timeslot(15,4,2024,13,0,13,30,doctor2);
-            r1.setReservation(insuredList.get(0),time,firstCenter);
+
+            reservations.add(r1.setReservation(insuredList.get(0),time,firstCenter));
+            reservations.add(r2.setReservation(insuredList.get(1),time2,firstCenter));
             r1.changeReservation(insuredList.get(0),time2,firstCenter);
-            r1.printReservations(r1.getReservations());
+            System.out.println(reservations);
+
+
 
     }
 
