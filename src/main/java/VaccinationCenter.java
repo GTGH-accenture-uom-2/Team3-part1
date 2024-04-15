@@ -6,7 +6,6 @@ public class VaccinationCenter {
     private String code;
     private String address;
     private LinkedHashMap<Timeslot, Boolean> timeslots;
-    //private HashMap<Timeslot, Boolean> timeslots;
     private static final LocalTime OPENS_AT = LocalTime.of(10,0);
     private static final LocalTime CLOSE_AT = LocalTime.of(15,0);
     private static final int DURATION = 30; //minutes
@@ -16,7 +15,6 @@ public class VaccinationCenter {
         this.code = code;
         this.address = address;
         timeslots = new LinkedHashMap<>();
-        //timeslots = new HashMap<>();
     }
     public HashMap<Timeslot, Boolean> getTimeslots() {
         return timeslots;
@@ -61,16 +59,16 @@ public class VaccinationCenter {
         Set<Timeslot> slots = timeslots.keySet();
         for(Timeslot aslot : slots){
             if(aslot.equals(timeslot)){
-                if(timeslots.get(aslot))
-                    return true;
+                    return timeslots.get(aslot);
             }
         }
         return false;
     }
 
-    public void perMonthTimeslots(){
+    public void perWeekTimeslots(LocalDate wishedDay){
         //for(int day=currentDate.getDayOfMonth();day <= currentDate.lengthOfMonth() ;day++){ } //per month
         //...
+        //LocalDate currentDate = LocalDate.now();
     }
     public void printTimeslots(){
         System.out.println("------------------- Daily timeslots ----------------");

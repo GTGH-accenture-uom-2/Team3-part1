@@ -42,25 +42,29 @@ public class Main {
 
         firstCenter.setDailyTimeslots(doctor1,doctor2);
         secondCenter.setDailyTimeslots(doctor3,doctor4);
-        //firstCenter.printTimeslots();
+        firstCenter.printTimeslots();
         //secondCenter.printTimeslots();
 
-        Timeslot time2=new Timeslot(14,4,2024,14,0,14,30,doctor2);
-        Timeslot time = new Timeslot(14,4,2024,13,0,13,30,doctor2);
+        Timeslot time2=new Timeslot(15,4,2024,14,0,14,30,doctor2);
+        Timeslot time = new Timeslot(15,4,2024,13,0,13,30,doctor2);
+        Timeslot time3 = new Timeslot(15,4,2024,13,0,13,30,doctor4);
 
         List<Map> reservations=new ArrayList<>();
         Reservation r1 = new Reservation(insuredList.get(0));
         Reservation r2 = new Reservation(insuredList.get(1));
+        Reservation r3 = new Reservation(insuredList.get(2));
 
         reservations.add(r1.setReservation(time,firstCenter));
         //reservations.add(r2.setReservation(time,firstCenter));
         //reservations.add(r1.setReservation(/*insuredList.get(0),*/time,firstCenter));
         //reservations.add(r2.setReservation(insuredList.get(1),time,firstCenter));
-        r1.changeReservation(/*insuredList.get(0),*/time2,firstCenter);
+        r1.changeReservation(/*insuredList.get(0),*/time2/*,firstCenter*/);
         r2.setReservation(time,firstCenter);
+        r1.printAvailableSlots();
 
-        r1.printAvailableSlots(firstCenter);
-
+        System.out.println("----------------");
+        r3.setReservation(time3,secondCenter);
+        r3.printAvailableSlots();
 
     }
 

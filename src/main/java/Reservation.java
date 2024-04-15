@@ -3,7 +3,7 @@ import java.util.*;
 public class Reservation {
     private Insured insured;
     private Timeslot timeslot;
-    //private VaccinationCenter vacCenter; //den to xrhsimopoieis pouthena
+    private VaccinationCenter vacCenter;
     private Map<Insured, Timeslot> reservations;
 
 
@@ -15,35 +15,34 @@ public class Reservation {
 
     }
 
-    public void printAvailableSlots(VaccinationCenter vacCenter) {
+    public void printAvailableSlots() {
         //HashMap<Timeslot,Boolean> timeslots=vacCenter.getTimeslots();
-        //System.out.println("The Available timeslots are : \n" + timeslots);
+        System.out.println("The Available timeslots are : \n" /*+ timeslots*/);
         vacCenter.printAvailableTimeslots();
-
     }
 
     public Map<Insured, Timeslot> setReservation(/*Insured insured,*/ Timeslot timeslot, VaccinationCenter vacCenter) {
         //Scanner setTimeslot=new Scanner(System.in);
         //printAvailableSlots(vacCenter);
         //System.out.println("Choose a available timeslot");
-
-        if (vacCenter.isAvailable(timeslot)) {
+        this.vacCenter = vacCenter;
+        if (this.vacCenter.isAvailable(timeslot)) {
             this.timeslot = timeslot;
             reservations.put(insured, timeslot);
-            vacCenter.makeReservation(timeslot);
+            this.vacCenter.makeReservation(timeslot);
         } else System.out.println("The timeslot is not available!?!?");
         return reservations;
     }
-    public /*Map<Insured, Timeslot>*/ void unsetReservation(/*Insured insured, Timeslot timeslot,*/ VaccinationCenter vacCenter) {
+    public /*Map<Insured, Timeslot>*/ void unsetReservation(/*Insured insured, Timeslot timeslot, VaccinationCenter vacCenter*/) {
         if (!vacCenter.isAvailable(this.timeslot)) {
             vacCenter.changeTheReservation(timeslot);
         } else System.out.println("The timeslot is not available!?!?");
         //return reservations;
     }
 
-    public void changeReservation(/*Insured insured,*/ Timeslot timeslot, VaccinationCenter vacCenter) {
+    public void changeReservation(/*Insured insured,*/ Timeslot timeslot/*, VaccinationCenter vacCenter*/) {
         if (reservations.containsKey(insured)) {
-            unsetReservation(vacCenter);
+            unsetReservation();
             this.timeslot = timeslot;
             setReservation(/*insured, */timeslot, vacCenter);
         }
