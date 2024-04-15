@@ -8,7 +8,6 @@ public class AFMValidator {
         }
         this.afm = afm;
     }
-
     public String getAfm() {
         return afm;
     }
@@ -21,5 +20,4 @@ public class AFMValidator {
     public String toString() {
         return afm ;
     }
-
 }

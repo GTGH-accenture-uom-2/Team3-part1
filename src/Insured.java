@@ -75,7 +75,6 @@ public class Insured {
     public EmailValidator getEmail() {
         return email;
     }
-
     public void setEmail(EmailValidator email) {
         if (email == null) {
             throw new IllegalArgumentException("Email validator cannot be null");

@@ -67,7 +67,6 @@ public class Main {
         int randomFiveDigits = 10000 + random.nextInt(90000);
         return birthdateStr + randomFiveDigits;
     }
-
     private static String generateAFM() {
         Random random = new Random();
         return String.format("%09d", random.nextInt(1000000000));

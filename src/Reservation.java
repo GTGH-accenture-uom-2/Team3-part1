@@ -32,6 +32,7 @@ public class Reservation {
         } else System.out.println("The timeslot is not available!");
     }
 
+
     public void changeReservation( Timeslot timeslot, VaccinationCenter vacCenter) {
         if (reservations.containsKey(insured)) {
             unsetReservation(vacCenter);
