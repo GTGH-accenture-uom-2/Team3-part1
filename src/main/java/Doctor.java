@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Doctor {
     private long amka;
@@ -45,6 +47,30 @@ public class Doctor {
     public void setTimeSlots(List<TimeSlot> timeSlots) {
         this.timeSlots = timeSlots;
     }
+
+    public void printReservedTimeslots(VaccinationCenter center, Reservation reservations) {
+
+        HashMap<TimeSlot, Boolean> timeslots = center.getTimeslots();
+
+
+        for (Map.Entry<TimeSlot, Boolean> entry : timeslots.entrySet()) {
+            TimeSlot timeslot = entry.getKey();
+            boolean isAvailable = entry.getValue();
+
+            if (isAvailable && reservations.getReservation().containsValue(timeslot)) {
+
+                for (Map.Entry<Insured, TimeSlot> reservation : reservations.getReservation().entrySet()) {
+                    if (reservation.getValue().equals(timeslot)) {
+                        Insured insured = reservation.getKey();
+                        System.out.println("Ασφαλισμένος: " + insured + ", Ραντεβού: " + timeslot);
+                    }
+                }
+            }
+        }
+    }
+
+    public String toString(){
+        return "Name: " + name +", Surname:" +surname +" ,amka: " + amka;}
 
 
 }
