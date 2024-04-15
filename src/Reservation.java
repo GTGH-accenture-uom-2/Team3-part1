@@ -40,9 +40,6 @@ public class Reservation {
         }
     }
 
-
-
-
     public Map<Insured, Timeslot> getReservations () {
         return reservations;
     }

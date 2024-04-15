@@ -58,7 +58,6 @@ public class Main {
         secondCenter.printAvailableTimeslots();
         System.out.println("First's Center Reservations: \n" + reservations1 +" \n " + "Second's Center Reservations : \n" + reservations2);
 
-
     }
 
     private static String generateAmka(LocalDate birthdate) {

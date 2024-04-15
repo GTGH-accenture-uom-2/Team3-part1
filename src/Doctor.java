@@ -21,6 +21,7 @@ public class Doctor {
         if(this == obj){
             return true;
         }
+
         // einai antikeimeno typou Doctor
         if(!(obj instanceof Doctor)){
             return false;

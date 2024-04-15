@@ -68,7 +68,6 @@ public class VaccinationCenter {
         }
         return false;
     }
-
     public void perMonthTimeslots(){
         //for(int day=currentDate.getDayOfMonth();day <= currentDate.lengthOfMonth() ;day++){ } //per month
         //...

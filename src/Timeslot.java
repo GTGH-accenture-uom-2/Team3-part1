@@ -23,7 +23,6 @@ public class Timeslot {
                 ", doctor=" + doctor.getName() +
                 "} \n";
     }
-
     public boolean equals(Object obj){
         if(this == obj){
             return true;

@@ -93,5 +93,4 @@ public class Insured {
         }
         this.birthdate = birthdate;
     }
-
 }
