@@ -37,35 +37,26 @@ public class Main {
 
         Doctor doctor1 = new Doctor("166803245", "Nikos", "Papadopoulos");
         Doctor doctor2 = new Doctor("166803323", "Maria", "Dimitriou");
+        Doctor doctor3 = new Doctor("166803123", "Kostas", "Papanikolaou");
+        Doctor doctor4 = new Doctor("166803789", "Anna", "Iwannou");
 
         firstCenter.setDailyTimeslots(doctor1,doctor2);
-        //firstCenter.printTimeslots();
+        secondCenter.setDailyTimeslots(doctor3,doctor4);
 
-        Timeslot time = new Timeslot(13,4,2024,13,0,13,30,doctor2);
-        if(firstCenter.isAvailable(time)){
-            System.out.println("Available");
-        }else{
-            System.out.println("Not Available");
-        }
+        Timeslot time2=new Timeslot(15,4,2024,14,0,14,30,doctor2);
+        Timeslot time = new Timeslot(15,4,2024,13,0,13,30,doctor2);
 
+        List<Map> reservations1=new ArrayList<>();
+        List<Map> reservations2=new ArrayList<>();
+        Reservation r1 = new Reservation(insuredList.get(0));
+        Reservation r2 = new Reservation(insuredList.get(1));
 
-        List<Map> reservations=new ArrayList<>();
-
-            Reservation r1 = new Reservation(insuredList.get(0),time,firstCenter);
-            Reservation r2 = new Reservation(insuredList.get(1),time,firstCenter);
-            /*Reservation r3 = new Reservation(insuredList.get(2),time,firstCenter);
-            Reservation r4 = new Reservation(insuredList.get(3),time,firstCenter);
-            Reservation r5 = new Reservation(insuredList.get(4),time,firstCenter);
-            Reservation r6 = new Reservation(insuredList.get(5),time,firstCenter);
-            Reservation r7 = new Reservation(insuredList.get(6),time,firstCenter);
-            Reservation r8 = new Reservation(insuredList.get(7),time,firstCenter);*/
-            Timeslot time2=new Timeslot(15,4,2024,13,0,13,30,doctor2);
-
-            reservations.add(r1.setReservation(insuredList.get(0),time,firstCenter));
-            reservations.add(r2.setReservation(insuredList.get(1),time2,firstCenter));
-            r1.changeReservation(insuredList.get(0),time2,firstCenter);
-            System.out.println(reservations);
-
+        reservations1.add(r1.setReservation(time,firstCenter));
+        r1.changeReservation(time2,firstCenter);
+        reservations1.add(r2.setReservation(time,firstCenter));
+        firstCenter.printAvailableTimeslots();
+        secondCenter.printAvailableTimeslots();
+        System.out.println("First's Center Reservations: \n" + reservations1 +" \n " + "Second's Center Reservations : \n" + reservations2);
 
 
     }
@@ -82,8 +73,4 @@ public class Main {
         Random random = new Random();
         return String.format("%09d", random.nextInt(1000000000));
     }
-
-
-
-
 }

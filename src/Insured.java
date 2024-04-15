@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Insured {
-    private AfmValidator afm;
+    private AFMValidator afm;
     private String amka;
     private String name;
     private String surname;
@@ -11,7 +11,7 @@ public class Insured {
     private LocalDate birthdate;
 
     public Insured(String afm,String amka,String name,String surname,EmailValidator email,LocalDate birthdate){
-        this.afm = new AfmValidator(afm);
+        this.afm = new AFMValidator(afm);
         if (!AmkaValidator.isValidAmka(amka, birthdate)) {
             throw new IllegalArgumentException("Invalid AMKA");
         }
@@ -28,14 +28,13 @@ public class Insured {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return "Insured {\n" +
-                "afm=" + afm + ",\n" +
-                "amka=" + amka + ",\n" +
-                "name=" + name + ",\n" +
-                "surname=" + surname + ",\n" +
-                "email=" + email.getEmailAddress() + ",\n" +
-                "birthdate=" + birthdate.format(formatter) + "\n" +
-                '}';
+        return "Insured {" +
+                "afm=" + afm + "," +
+                "amka=" + amka + "," +
+                "name=" + name + "," +
+                "surname=" + surname + "," +
+                "email=" + email.getEmailAddress() + "," +
+                "birthdate=" + birthdate.format(formatter) + " } \n";
     }
 
     public String getAfm() {
@@ -43,7 +42,7 @@ public class Insured {
     }
 
     public void setAfm(String afm) {
-        this.afm = new AfmValidator(afm);
+        this.afm = new AFMValidator(afm);
     }
 
     public String getAmka() {

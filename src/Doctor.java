@@ -25,7 +25,7 @@ public class Doctor {
         if(!(obj instanceof Doctor)){
             return false;
         }
-        Doctor doc = (Doctor) obj; // type casting
+        Doctor doc = (Doctor) obj; //type casting
 
         return name.equals(doc.name) && amka.equals(doc.amka) && surname.equals(doc.surname);
     }

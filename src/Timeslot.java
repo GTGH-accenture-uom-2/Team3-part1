@@ -14,16 +14,25 @@ public class Timeslot {
         this.endTime = LocalTime.of(endHour, endMinute);
         this.doctor = doctor;
     }
-
-
-
     @Override
     public String toString() {
         return "TimeSlot{" +
                 "date=" + date +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
-//                ", doctor=" + (doctor != null ? doctor.getName() : "None") +
-                '}';
+                ", doctor=" + doctor.getName() +
+                "} \n";
     }
+
+    public boolean equals(Object obj){
+        if(this == obj){
+            return true;
+        }
+        if(!(obj instanceof Timeslot)){
+            return false;
+        }
+        Timeslot tslot = (Timeslot) obj; // type casting
+        return date.equals(tslot.date) && startTime.equals(tslot.startTime) && endTime.equals(tslot.endTime) && doctor.equals(tslot.doctor);
+    }
+
 }

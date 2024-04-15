@@ -5,10 +5,8 @@ import java.time.Month;
 public class VaccinationCenter {
     private String code;
     private String address;
-    private Timeslot timeslot;
     private LinkedHashMap<Timeslot, Boolean> timeslots;
-    //private static final int OPEN_AT = 10;
-    //private static final int CLOSE_AT = 15;
+    //private HashMap<Timeslot, Boolean> timeslots;
     private static final LocalTime OPENS_AT = LocalTime.of(10,0);
     private static final LocalTime CLOSE_AT = LocalTime.of(15,0);
     private static final int DURATION = 30; //minutes
@@ -18,11 +16,11 @@ public class VaccinationCenter {
         this.code = code;
         this.address = address;
         timeslots = new LinkedHashMap<>();
+
     }
     public HashMap<Timeslot, Boolean> getTimeslots() {
         return timeslots;
     }
-
     public void makeReservation(Timeslot timeslot){
         Set<Timeslot> slots = timeslots.keySet();
         for(Timeslot aslot : slots){
@@ -30,6 +28,21 @@ public class VaccinationCenter {
                 timeslots.replace(aslot,false);
             }
         }
+    }
+    public void changeTheReservation(Timeslot timeslot){
+        Set<Timeslot> slots = timeslots.keySet();
+        for(Timeslot aslot : slots){
+            if(aslot.equals(timeslot)){
+                timeslots.replace(aslot,true);
+            }
+        }
+    }
+    public void printAvailableTimeslots(){
+        System.out.println( "Available for Appointment : ");
+        timeslots.forEach((key, value) -> {
+            if(value)
+                System.out.println(key);
+        });
     }
     public void setDailyTimeslots(Doctor firstDoctor, Doctor secondDoctor){
         LocalDate currentDate = LocalDate.now();
@@ -44,9 +57,9 @@ public class VaccinationCenter {
             time = time.plusMinutes(DURATION);
         }
     }
-    /*public boolean isAvailable(Timeslot timeslot){
-        Set<Timeslot> slots = timeslots.keySet();
+    public boolean isAvailable(Timeslot timeslot){
 
+        Set<Timeslot> slots = timeslots.keySet();
         for(Timeslot aslot : slots){
             if(aslot.equals(timeslot)){
                 if(timeslots.get(aslot))
@@ -54,7 +67,7 @@ public class VaccinationCenter {
             }
         }
         return false;
-    }*/
+    }
 
     public void perMonthTimeslots(){
         //for(int day=currentDate.getDayOfMonth();day <= currentDate.lengthOfMonth() ;day++){ } //per month
@@ -73,14 +86,5 @@ public class VaccinationCenter {
         text = "Vaccination Center Code : " + code;
         text += '\n' + "Address : " + address;
         return text;
-    }
-
-
-    public boolean isAvailable(Timeslot timeslot) {
-        boolean available;
-        if(timeslots.get(timeslot)==null)
-            available=true;
-        else available=false;
-        return  available;
     }
 }

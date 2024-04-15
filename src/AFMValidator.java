@@ -1,8 +1,8 @@
-public class AfmValidator {
+public class AFMValidator {
 
     private final String afm;
 
-    public AfmValidator(String afm) {
+    public AFMValidator(String afm) {
         if (!isValidAFM(afm)) {
             throw new IllegalArgumentException("Invalid AFM: AFM must be exactly 9 digits long.");
         }
@@ -19,9 +19,7 @@ public class AfmValidator {
 
     @Override
     public String toString() {
-        return "AFMValidator{" +
-                "afm='" + afm + '\'' +
-                '}';
+        return afm ;
     }
 
 }
