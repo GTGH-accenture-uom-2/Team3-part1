@@ -17,7 +17,7 @@ bin/
 
 ### NetBeans ###
 /nbproject/private/
-/nbbuild/
+nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
@@ -27,3 +27,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Added directory to ignore ###
+target/

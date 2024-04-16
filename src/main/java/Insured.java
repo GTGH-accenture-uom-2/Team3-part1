@@ -1,47 +1,62 @@
+import validators.AFMValidator;
+import validators.AmkaValidator;
+import validators.EmailValidator;
+import validators.NameSurnameValidator;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
+/**
+ * Class representing an insured individual, encapsulating personal data including tax, social security information,
+ * name, email, and vaccination status.
+ */
 public class Insured {
+    // Validators to ensure correct formatting and validity of each data type
     private AFMValidator afm;
-    private String amka;
-    private String name;
-    private String surname;
+    private AmkaValidator amka;
+    private NameSurnameValidator name;
+    private NameSurnameValidator surname;
     private EmailValidator email;
     private LocalDate birthdate;
     private boolean isVaccinated = false;
 
-    public Insured(String afm,String amka,String name,String surname,EmailValidator email,LocalDate birthdate){
+    /**
+     * Constructor to initialize an Insured object with validated data.
+     * @param afm Tax Identification Number.
+     * @param amka Social Security Number.
+     * @param name First Name.
+     * @param surname Last Name.
+     * @param email Email address.
+     * @param birthdate Birthdate of the insured.
+     */
+    public Insured(String afm, String amka, String name, String surname, String email, LocalDate birthdate) {
         this.afm = new AFMValidator(afm);
-        if (!AmkaValidator.isValidAmka(amka, birthdate)) {
-            throw new IllegalArgumentException("Invalid AMKA");
-        }
-        if (email == null) {
-            throw new IllegalArgumentException("Email validator cannot be null");
-        }
-        NameSurnameValidator.validateNameOrSurname(name);
-        NameSurnameValidator.validateNameOrSurname(surname);
-        this.amka = amka;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
+        this.amka = new AmkaValidator(amka, birthdate);
+        this.name = new NameSurnameValidator(name);
+        this.surname = new NameSurnameValidator(surname);
+        this.email = new EmailValidator(email);
         this.birthdate = birthdate;
     }
 
+    /**
+     * Provides a formatted string representing the data of the Insured object.
+     * @return formatted string.
+     */
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return "Insured {\n" +
-                "afm=" + afm + ",\n" +
-                "amka=" + amka + ",\n" +
-                "name=" + name + ",\n" +
-                "surname=" + surname + ",\n" +
+        return "Insured{"+
+                "afm=" + afm.getAfm() + ",\n" +
+                "amka=" + amka.getAmka() + ",\n" +
+                "name=" + name.getNameOrSurname() + ",\n" +
+                "surname=" + surname.getNameOrSurname() + ",\n" +
                 "email=" + email.getEmailAddress() + ",\n" +
                 "birthdate=" + birthdate.format(formatter) + "\n" +
                 "isVaccinated=" + isVaccinated + "\n" +
                 '}';
     }
 
+    // Getters and setters for each field with validation where necessary
     public String getAfm() {
         return afm.getAfm();
     }
@@ -51,43 +66,35 @@ public class Insured {
     }
 
     public String getAmka() {
-        return amka;
+        return amka.getAmka();
     }
 
     public void setAmka(String amka) {
-        if (!AmkaValidator.isValidAmka(amka, this.birthdate)) {
-            throw new IllegalArgumentException("Invalid AMKA");
-        }
-        this.amka = amka;
+        this.amka = new AmkaValidator(amka, this.birthdate);
     }
 
     public String getName() {
-        return name;
+        return name.getNameOrSurname();
     }
 
     public void setName(String name) {
-        NameSurnameValidator.validateNameOrSurname(name);
-        this.name = name;
+        this.name = new NameSurnameValidator(name);
     }
 
     public String getSurname() {
-        NameSurnameValidator.validateNameOrSurname(surname);
-        return surname;
+        return surname.getNameOrSurname();
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        this.surname = new NameSurnameValidator(surname);
     }
 
     public EmailValidator getEmail() {
         return email;
     }
 
-    public void setEmail(EmailValidator email) {
-        if (email == null) {
-            throw new IllegalArgumentException("Email validator cannot be null");
-        }
-        this.email = email;
+    public void setEmail(String emailAddress) {
+        this.email = new EmailValidator(emailAddress);
     }
 
     public LocalDate getBirthdate() {
@@ -95,18 +102,16 @@ public class Insured {
     }
 
     public void setBirthdate(LocalDate birthdate) {
-        if (!AmkaValidator.isValidAmka(this.amka, birthdate)) {
-            throw new IllegalArgumentException("AMKA does not match new birthdate");
-        }
+        // Update AMKA with the new birthdate
+        this.amka = new AmkaValidator(this.amka.getAmka(), birthdate);
         this.birthdate = birthdate;
-    }
-
-    public void setVaccinated(boolean vaccinated) {
-        this.isVaccinated = vaccinated;
     }
 
     public boolean isVaccinated() {
         return isVaccinated;
     }
 
+    public void setVaccinated(boolean vaccinated) {
+        this.isVaccinated = vaccinated;
+    }
 }
