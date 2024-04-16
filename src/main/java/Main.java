@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +21,7 @@ public class Main {
             String amka = generateAmka(birthdate);
             String afm = generateAFM();
 
-            //insuredList.add(new Insured("010101010101", amka, name, surname, new EmailValidator(email), birthdate)); //INVALID AFM CASE
-            //insuredList.add(new Insured(afm, "01010101010", name, surname, new EmailValidator(email), birthdate)); //INVALID AMKA CASE
-            //insuredList.add(new Insured(afm, amka, name, surname, new EmailValidator("leonidas"), birthdate)); //INVALID email CASE
-
-            insuredList.add(new Insured(afm, amka, name, surname, new EmailValidator(email), birthdate));
+            insuredList.add(new Insured(afm, amka, name, surname, email, birthdate));
         }
 
         for (Insured insured : insuredList) {
