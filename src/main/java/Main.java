@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -20,11 +19,7 @@ public class Main {
             String amka = generateAmka(birthdate);
             String afm = generateAFM();
 
-            //insuredList.add(new Insured("010101010101", amka, name, surname, new EmailValidator(email), birthdate)); //INVALID AFM CASE
-            //insuredList.add(new Insured(afm, "01010101010", name, surname, new EmailValidator(email), birthdate)); //INVALID AMKA CASE
-            //insuredList.add(new Insured(afm, amka, name, surname, new EmailValidator("leonidas"), birthdate)); //INVALID email CASE
-
-            insuredList.add(new Insured(afm, amka, name, surname, new EmailValidator(email), birthdate));
+            insuredList.add(new Insured(afm, amka, name, surname, email, birthdate));
         }
         /*
         for (Insured insured : insuredList) {
@@ -48,7 +43,7 @@ public class Main {
         Timeslot time2=new Timeslot(15,4,2024,14,0,14,30,doctor2);
         Timeslot time = new Timeslot(15,4,2024,13,0,13,30,doctor2);
         Timeslot time3 = new Timeslot(15,4,2024,13,0,13,30,doctor4);
-
+        /*
         List<Map> reservations=new ArrayList<>();
         Reservation r1 = new Reservation(insuredList.get(0));
         Reservation r2 = new Reservation(insuredList.get(1));
@@ -65,6 +60,7 @@ public class Main {
         System.out.println("----------------");
         r3.setReservation(time3,secondCenter);
         r3.printAvailableSlots();
+        */
 
     }
 

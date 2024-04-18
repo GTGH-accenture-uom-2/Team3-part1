@@ -64,12 +64,6 @@ public class VaccinationCenter {
         }
         return false;
     }
-
-    public void perWeekTimeslots(LocalDate wishedDay){
-        //for(int day=currentDate.getDayOfMonth();day <= currentDate.lengthOfMonth() ;day++){ } //per month
-        //...
-        //LocalDate currentDate = LocalDate.now();
-    }
     public void printTimeslots(){
         System.out.println("------------------- Daily timeslots ----------------");
         timeslots.forEach((key, value) -> {

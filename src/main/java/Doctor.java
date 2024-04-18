@@ -17,16 +17,13 @@ public class Doctor {
     public String getName() {return name;}
     public String getSurname(){return surname;}
     public boolean equals(Object obj){
-        //deixnoun stin idia thesi mnhmhs tote true
         if(this == obj){
             return true;
         }
-        // einai antikeimeno typou Doctor
         if(!(obj instanceof Doctor)){
             return false;
         }
         Doctor doc = (Doctor) obj; // type casting
-
         return name.equals(doc.name) && amka.equals(doc.amka) && surname.equals(doc.surname);
     }
 
