@@ -19,6 +19,14 @@ public class Timeslot {
         this.doctor = doctor;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "TimeSlot{" +
@@ -46,5 +54,6 @@ public class Timeslot {
                 endTime.equals(otherTimeslot.endTime) &&
                 doctor.equals(otherTimeslot.doctor);
     }
+
 
 }

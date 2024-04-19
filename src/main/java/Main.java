@@ -1,4 +1,6 @@
 import validators.AFMValidator;
+
+import java.time.Period;
 import java.util.Map;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +16,7 @@ public class Main {
 
         List<Insured> insuredList = new ArrayList<>();
         List<Doctor> doctorsList = new ArrayList<>();
+        List<Reservation> reservationList = new ArrayList<>();
 
         Random random = new Random();
 
@@ -29,16 +32,16 @@ public class Main {
         }
 
 
-        VaccinationCenter firstCenter = new VaccinationCenter("61669","Simeonidi");
+        VaccinationCenter firstCenter = new VaccinationCenter("61669", "Simeonidi");
         VaccinationCenter secondCenter = new VaccinationCenter("85257", "Konstantinoupoleos");
 
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             String name = greekNames.get(random.nextInt(greekNames.size()));
             String surname = greekSurnames.get(random.nextInt(greekSurnames.size()));
             LocalDate birthdate = generateRandomBirthdate(random);
             String amka = generateAmka(birthdate);
 
-            doctorsList.add(new Doctor(amka, name, surname,birthdate));
+            doctorsList.add(new Doctor(amka, name, surname, birthdate));
         }
 
 
@@ -55,9 +58,9 @@ public class Main {
                     firstCenter.makeReservation(firstCenterTimeslots.get(i));
                     new Reservation(insuredList.get(i)).setReservation(firstCenterTimeslots.get(i), firstCenter);
                 }
-                if (i < secondCenterTimeslots.size() && i+4 < insuredList.size()) {
+                if (i < secondCenterTimeslots.size() && i + 4 < insuredList.size()) {
                     secondCenter.makeReservation(secondCenterTimeslots.get(i));
-                    new Reservation(insuredList.get(i+4)).setReservation(secondCenterTimeslots.get(i), secondCenter);
+                    new Reservation(insuredList.get(i + 4)).setReservation(secondCenterTimeslots.get(i), secondCenter);
                 }
             }
         }
@@ -76,6 +79,55 @@ public class Main {
         firstCenter.printAvailableTimeslots();
         System.out.println("Second Center:");
         secondCenter.printAvailableTimeslots();
+
+        System.out.println("--------------------");
+
+
+        Reservation r1 = new Reservation(insuredList.get(0));
+        Reservation r2 = new Reservation(insuredList.get(1));
+        Doctor doctor1=doctorsList.get(0);
+        doctor1.markAsVaccinated(r1);
+
+
+//        Vaccination v1 = new Vaccination(insuredList.get(0),doctor1);
+//        v1.setVaccinationDate();
+//        v1.setExpirationDate();
+
+
+        doctor1.markAsVaccinated(r2);
+
+//        Vaccination v2 = new Vaccination(insuredList.get(1),doctor1);
+//        v2.setVaccinationDate();
+//        v2.setExpirationDate();
+
+        System.out.println("----------------");
+        Reservation r3 = new Reservation(insuredList.get(2));
+        Reservation r4 = new Reservation(insuredList.get(3));
+        Doctor doctor2=doctorsList.get(1);
+        doctor2.markAsVaccinated(r3);
+        doctor2.markAsVaccinated(r4);
+
+        reservationList.add(r1);
+        reservationList.add(r2);
+        reservationList.add(r3);
+        reservationList.add(r4);
+
+
+        for (Doctor d:doctorsList){
+            d.printVaccinations();
+            System.out.println("--------------");
+        }
+
+        System.out.println("--------------------------------------");
+
+
+
+        for (Insured insured:insuredList){
+            if((!insured.isVaccinated()) && (insured.getAge()>60)){
+                System.out.println("The insured over 60: "+ insured.getSurname()+" "+insured.getName()+" didn't book an appointment");
+            }
+        }
+
     }
 
     private static String generateAmka(LocalDate birthdate) {

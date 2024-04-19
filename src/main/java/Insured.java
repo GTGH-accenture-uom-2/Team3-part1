@@ -4,6 +4,7 @@ import validators.EmailValidator;
 import validators.NameSurnameValidator;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -19,6 +20,7 @@ public class Insured {
     private EmailValidator email;
     private LocalDate birthdate;
     private boolean isVaccinated = false;
+    Vaccination vaccination;
 
     /**
      * Constructor to initialize an Insured object with validated data.
@@ -114,4 +116,18 @@ public class Insured {
     public void setVaccinated(boolean vaccinated) {
         this.isVaccinated = vaccinated;
     }
+
+    public int getAge() {
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(birthdate, currentDate);
+        return period.getYears();
+    }
+    public void setVaccination(Vaccination vaccination) {
+        if (isVaccinated) this.vaccination = vaccination;
+    }
+
+    public LocalDate getVaccinationDate() {
+        return vaccination.getVaccinationDate();
+    }
+
 }
