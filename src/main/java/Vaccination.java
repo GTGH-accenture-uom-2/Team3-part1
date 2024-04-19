@@ -6,6 +6,7 @@ public class Vaccination {
     private LocalDate vaccinationDate;
     private LocalDate expirationDate;
     private Timeslot timeslot;
+    private VaccinationCenter vC;
 
 
 
@@ -16,9 +17,10 @@ public class Vaccination {
         this.expirationDate = expirationDate;
     }
 
-    public Vaccination(Insured insured, Doctor doctor) {
+    public Vaccination(Insured insured, Doctor doctor,VaccinationCenter vC) {
         this.insured = insured;
         this.doctor = doctor;
+        this.vC=vC;
     }
 
     public Insured getInsured() {
@@ -41,9 +43,9 @@ public class Vaccination {
         return vaccinationDate;
     }
 
-    public void setVaccinationDate() {
+    public LocalDate setVaccinationDate() {
         if (insured.isVaccinated()){
-            vaccinationDate= timeslot.getDate();
+            vaccinationDate= vC.getTimeslots()
         }
         this.vaccinationDate = vaccinationDate;
     }

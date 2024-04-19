@@ -23,6 +23,7 @@ public class VaccinationCenter {
         return timeslots;
     }
 
+
     private void createTimeslots() {
         LocalDate currentDate = LocalDate.now();
         LocalTime time = OPENS_AT;

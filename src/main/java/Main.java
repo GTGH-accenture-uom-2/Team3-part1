@@ -82,6 +82,9 @@ public class Main {
 
         System.out.println("--------------------");
 
+        for (Timeslot t:firstCenterTimeslots){
+            System.out.println(t);
+        }
 
         Reservation r1 = new Reservation(insuredList.get(0));
         Reservation r2 = new Reservation(insuredList.get(1));
@@ -89,12 +92,12 @@ public class Main {
         doctor1.markAsVaccinated(r1);
 
 
-//        Vaccination v1 = new Vaccination(insuredList.get(0),doctor1);
+//        Vaccination v1 = new Vaccination(insuredList.get(0),doctor1,firstCenter);
 //        v1.setVaccinationDate();
 //        v1.setExpirationDate();
-
-
-        doctor1.markAsVaccinated(r2);
+//
+//
+//        doctor1.markAsVaccinated(r2);
 
 //        Vaccination v2 = new Vaccination(insuredList.get(1),doctor1);
 //        v2.setVaccinationDate();
