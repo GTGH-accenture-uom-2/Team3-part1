@@ -4,6 +4,7 @@ import validators.EmailValidator;
 import validators.NameSurnameValidator;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -46,14 +47,19 @@ public class Insured {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return "Insured{"+
-                "afm=" + afm.getAfm() + ",\n" +
-                "amka=" + amka.getAmka() + ",\n" +
-                "name=" + name.getNameOrSurname() + ",\n" +
-                "surname=" + surname.getNameOrSurname() + ",\n" +
-                "email=" + email.getEmailAddress() + ",\n" +
-                "birthdate=" + birthdate.format(formatter) + "\n" +
-                "isVaccinated=" + isVaccinated + "\n" +
-                '}';
+                " afm=" + afm.getAfm() + "," +
+                " amka=" + amka.getAmka() + ", " +
+                "name=" + name.getNameOrSurname() + ", " +
+                "surname=" + surname.getNameOrSurname() + ", " +
+                "email=" + email.getEmailAddress() + ", " +
+                "birthdate=" + birthdate.format(formatter) + " " +
+                "isVaccinated=" + isVaccinated +
+                '}' ;
+    }
+    public int getAge() {
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(birthdate, currentDate);
+        return period.getYears();
     }
 
     // Getters and setters for each field with validation where necessary
