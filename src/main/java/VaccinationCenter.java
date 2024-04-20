@@ -11,16 +11,25 @@ public class VaccinationCenter {
     private static final LocalTime CLOSE_AT = LocalTime.of(15,0);
     private static final int DURATION = 30; //minutes
     private static final int MAX_PER_DOCTOR_TIMESLOTS = 5;
+    private ArrayList<Reservation> reservationList;
 
     public VaccinationCenter(String code, String address) {
         this.code = code;
         this.address = address;
-        timeslots = new LinkedHashMap<>();
+        this.timeslots = new LinkedHashMap<>();
         createTimeslots();
     }
 
     public HashMap<Timeslot, Boolean> getTimeslots() {
         return timeslots;
+    }
+
+    public ArrayList<Reservation> getReservationList() {
+        return reservationList;
+    }
+
+    public void setReservationList(ArrayList<Reservation> reservationList) {
+        this.reservationList = reservationList;
     }
 
     private void createTimeslots() {
@@ -51,14 +60,14 @@ public class VaccinationCenter {
     public void printAvailableTimeslots(){
         timeslots.forEach((key, value) -> {
             if(value)
-                System.out.println(" Available Appointments: " + key );
+                System.out.println(" Available Appointment: " + key );
         });
     }
 
     public void printBookedTimeslots(){
         timeslots.forEach((key, value) -> {
             if(!value)
-                System.out.println(" Booked Timeslots: " + key );
+                System.out.println(" Booked Appointment: " + key );
         });
     }
 
@@ -89,6 +98,7 @@ public class VaccinationCenter {
         }
         return false;
     }
+
 
 
     @Override

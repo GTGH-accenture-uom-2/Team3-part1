@@ -7,7 +7,6 @@ public class Doctor {
     private AmkaValidator amka;
     private String name;
     private String surname;
-    private LocalDate birthdate;
     private List<Timeslot> timeSlots;
 
     public Doctor(String amka,String name,String surname,LocalDate birthdate){
@@ -43,7 +42,6 @@ public class Doctor {
     public List<Timeslot> getTimeSlots() {
         return timeSlots;
     }
-
 
     @Override
     public boolean equals(Object obj){

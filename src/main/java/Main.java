@@ -1,11 +1,8 @@
 import validators.AFMValidator;
-import java.util.Map;
+
+import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
@@ -49,24 +46,59 @@ public class Main {
         List<Timeslot> firstCenterTimeslots = new ArrayList<>(firstCenter.getTimeslots().keySet());
         List<Timeslot> secondCenterTimeslots = new ArrayList<>(secondCenter.getTimeslots().keySet());
 
-        if (!firstCenterTimeslots.isEmpty() && !secondCenterTimeslots.isEmpty()) {
-            for (int i = 0; i < 4; i++) {
-                if (i < firstCenterTimeslots.size() && i < insuredList.size()) {
-                    firstCenter.makeReservation(firstCenterTimeslots.get(i));
-                    new Reservation(insuredList.get(i)).setReservation(firstCenterTimeslots.get(i), firstCenter);
-                }
-                if (i < secondCenterTimeslots.size() && i+4 < insuredList.size()) {
-                    secondCenter.makeReservation(secondCenterTimeslots.get(i));
-                    new Reservation(insuredList.get(i+4)).setReservation(secondCenterTimeslots.get(i), secondCenter);
-                }
-            }
-        }
+        List<Reservation> reservations = new ArrayList<>();
+
+        //Prwto Center MONO
+        Set<Timeslot> timeslotSet = firstCenter.getTimeslots().keySet();
+        List<Timeslot> timeslotList = new ArrayList<>(timeslotSet);
+        //Prwto Center MONO
+
+
+        Reservation reservation1 = new Reservation(insuredList.get(0));
+        Reservation reservation2 = new Reservation(insuredList.get(1));
+        Reservation reservation3 = new Reservation(insuredList.get(2));
+        Reservation reservation4 = new Reservation(insuredList.get(3));
+
+
+        ArrayList<Reservation> firstCenterReservations = new ArrayList<>();
+
+        firstCenterReservations.add(reservation1);
+        firstCenterReservations.add(reservation2);
+        firstCenterReservations.add(reservation3);
+        firstCenterReservations.add(reservation4);
+
+        firstCenter.setReservationList(firstCenterReservations);
+
+        reservation1.setReservation(timeslotList.get(0), firstCenter);
+        reservation2.setReservation(timeslotList.get(1), firstCenter);
+        reservation3.setReservation(timeslotList.get(2), firstCenter);
+        reservation4.setReservation(timeslotList.get(3), firstCenter);
+
+        //doctorsList.get(0).completeVaccination(reservation1);
+        //doctorsList.get(0).completeVaccination(reservation2);
+
+
+
+
+
+//        if (!firstCenterTimeslots.isEmpty() && !secondCenterTimeslots.isEmpty()) {
+//            for (int i = 0; i < 4; i++) {
+//                if (i < firstCenterTimeslots.size() && i < insuredList.size()) {
+//                    firstCenter.makeReservation(firstCenterTimeslots.get(i));
+//                    new Reservation(insuredList.get(i)).setReservation(firstCenterTimeslots.get(i), firstCenter);
+//                }
+//                if (i < secondCenterTimeslots.size() && i+4 < insuredList.size()) {
+//                    secondCenter.makeReservation(secondCenterTimeslots.get(i));
+//                    new Reservation(insuredList.get(i+4)).setReservation(secondCenterTimeslots.get(i), secondCenter);
+//                }
+//            }
+//        }
 
         // Displaying the reserved timeslots for verification
         System.out.println("Reservations at First Center:");
         firstCenter.printBookedTimeslots();
-        System.out.println("Reservations at Second Center:");
-        secondCenter.printBookedTimeslots();
+        //System.out.println("Reservations at Second Center:");
+        //secondCenter.printBookedTimeslots();
 
         System.out.println("-------------------------------------------------------------------");
 
@@ -76,6 +108,8 @@ public class Main {
         firstCenter.printAvailableTimeslots();
         System.out.println("Second Center:");
         secondCenter.printAvailableTimeslots();
+
+
     }
 
     private static String generateAmka(LocalDate birthdate) {
