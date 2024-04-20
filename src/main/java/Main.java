@@ -82,6 +82,10 @@ public class Main {
 
         System.out.println("--------------------");
 
+        for (Timeslot f:firstCenterTimeslots){
+            System.out.println(f);
+        }
+
         for (Timeslot t:firstCenterTimeslots){
             System.out.println(t);
         }

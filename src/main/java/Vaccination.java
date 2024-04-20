@@ -43,12 +43,12 @@ public class Vaccination {
         return vaccinationDate;
     }
 
-    public LocalDate setVaccinationDate() {
-        if (insured.isVaccinated()){
-            vaccinationDate= vC.getTimeslots()
-        }
-        this.vaccinationDate = vaccinationDate;
-    }
+//    public LocalDate setVaccinationDate() {
+//        if (insured.isVaccinated()){
+//            //vaccinationDate= vC.getTimeslots()
+//        }
+//        this.vaccinationDate = vaccinationDate;
+//    }
 
     public LocalDate getExpirationDate() {
         return expirationDate;
