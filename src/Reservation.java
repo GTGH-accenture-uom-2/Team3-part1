@@ -13,7 +13,6 @@ public class Reservation {
 
     }
 
-
     public Map<Insured, Timeslot> setReservation( Timeslot timeslot, VaccinationCenter vacCenter) {
         //Scanner setTimeslot=new Scanner(System.in);
         //printAvailableSlots(vacCenter);
