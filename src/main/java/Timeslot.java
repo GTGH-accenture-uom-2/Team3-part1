@@ -15,6 +15,14 @@ public class Timeslot {
         this.doctor = doctor;
     }
 
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
     public void assignDoctor(Doctor doctor) {
         this.doctor = doctor;
     }

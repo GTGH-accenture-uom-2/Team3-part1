@@ -20,6 +20,10 @@ public class VaccinationCenter {
         createTimeslots();
     }
 
+    public void setTimeslots(LinkedHashMap<Timeslot, Boolean> timeslots) {
+        this.timeslots = timeslots;
+    }
+
     public HashMap<Timeslot, Boolean> getTimeslots() {
         return timeslots;
     }

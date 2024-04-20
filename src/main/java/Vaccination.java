@@ -16,10 +16,11 @@ public class Vaccination {
     }
 
     private LocalDate calculateExpirationDate(LocalDate vaccinationDate) {
+
         return vaccinationDate.plusYears(2);
     }
 
-    private void isVaccinated() {
+    public void isVaccinated() {
         insured.setVaccinated(true);
     }
 
@@ -51,5 +52,8 @@ public class Vaccination {
     public void setVaccinationDate(LocalDate vaccinationDate) {
         this.vaccinationDate = vaccinationDate;
         this.expirationDate = calculateExpirationDate(vaccinationDate);
+    }
+    public String toString(){
+        return "The Insured" + insured + '\n' + " vaccinated at "  + vaccinationDate + "\n";
     }
 }

@@ -6,14 +6,12 @@ import java.time.format.DateTimeFormatter;
 
 public class Main {
     public static void main(String[] args) {
+        //Creation of 15 insured
         List<String> greekNames = Arrays.asList("Nikos", "Yiannis", "Kostas", "Maria", "Eleni", "Dimitris", "Alexandra", "Vasiliki", "Georgios", "Panagiotis");
         List<String> greekSurnames = Arrays.asList("Papadopoulos", "Nikolaidou", "Kostas", "Dimitriou", "Vasileiou", "Bozatzidou", "Alexaidou", "Giorgiou", "Stamatakis", "Antonopoulos");
-
         List<Insured> insuredList = new ArrayList<>();
         List<Doctor> doctorsList = new ArrayList<>();
-
         Random random = new Random();
-
         for (int i = 0; i < 15; i++) {
             String name = greekNames.get(random.nextInt(greekNames.size()));
             String surname = greekSurnames.get(random.nextInt(greekSurnames.size()));
@@ -21,36 +19,32 @@ public class Main {
             LocalDate birthdate = generateRandomBirthdate(random);
             String amka = generateAmka(birthdate);
             String afm = generateAFM();
-
             insuredList.add(new Insured(afm, amka, name, surname, email, birthdate));
         }
 
-
+        //Creation of 2 Vaccination Centers
         VaccinationCenter firstCenter = new VaccinationCenter("61669","Simeonidi");
         VaccinationCenter secondCenter = new VaccinationCenter("85257", "Konstantinoupoleos");
 
+        //creation of 4 doctors
         for (int i = 0; i < 4; i++){
             String name = greekNames.get(random.nextInt(greekNames.size()));
             String surname = greekSurnames.get(random.nextInt(greekSurnames.size()));
             LocalDate birthdate = generateRandomBirthdate(random);
             String amka = generateAmka(birthdate);
-
             doctorsList.add(new Doctor(amka, name, surname,birthdate));
         }
 
-
+        //assign doctors to vaccination center
         firstCenter.assignDoctorsToTimeslots(doctorsList.get(0), doctorsList.get(1));
         secondCenter.assignDoctorsToTimeslots(doctorsList.get(2), doctorsList.get(3));
 
-
-        List<Timeslot> firstCenterTimeslots = new ArrayList<>(firstCenter.getTimeslots().keySet());
-        List<Timeslot> secondCenterTimeslots = new ArrayList<>(secondCenter.getTimeslots().keySet());
-
+        //creation of 8 reservations
         List<Reservation> reservations = new ArrayList<>();
 
-        //Prwto Center MONO
-        Set<Timeslot> timeslotSet = firstCenter.getTimeslots().keySet();
-        List<Timeslot> timeslotList = new ArrayList<>(timeslotSet);
+        //list of slots for the first center
+        Set<Timeslot> firstCenterTimeslotsSet = firstCenter.getTimeslots().keySet();
+        List<Timeslot> firstCenterTimeslotsList = new ArrayList<>(firstCenterTimeslotsSet);
         //Prwto Center MONO
 
 
@@ -69,36 +63,44 @@ public class Main {
 
         firstCenter.setReservationList(firstCenterReservations);
 
-        reservation1.setReservation(timeslotList.get(0), firstCenter);
-        reservation2.setReservation(timeslotList.get(1), firstCenter);
-        reservation3.setReservation(timeslotList.get(2), firstCenter);
-        reservation4.setReservation(timeslotList.get(3), firstCenter);
+        reservation1.setReservation(firstCenterTimeslotsList.get(0), firstCenter);
+        reservation2.setReservation(firstCenterTimeslotsList.get(1), firstCenter);
+        reservation3.setReservation(firstCenterTimeslotsList.get(2), firstCenter);
+        reservation4.setReservation(firstCenterTimeslotsList.get(3), firstCenter);
+        reservation1.changeReservation(firstCenterTimeslotsList.get(9),firstCenter);
 
-        //doctorsList.get(0).completeVaccination(reservation1);
-        //doctorsList.get(0).completeVaccination(reservation2);
+        //list of slots for the second center
+        Set<Timeslot> secondCenterTimeslotsSet = secondCenter.getTimeslots().keySet();
+        List<Timeslot> secondCenterTimeslotsList = new ArrayList<>(secondCenterTimeslotsSet);
+        //Prwto Center MONO
 
 
+        Reservation reservation5 = new Reservation(insuredList.get(4));
+        Reservation reservation6 = new Reservation(insuredList.get(5));
+        Reservation reservation7 = new Reservation(insuredList.get(6));
+        Reservation reservation8 = new Reservation(insuredList.get(7));
 
 
+        ArrayList<Reservation> secondCenterReservations = new ArrayList<>();
 
-//        if (!firstCenterTimeslots.isEmpty() && !secondCenterTimeslots.isEmpty()) {
-//            for (int i = 0; i < 4; i++) {
-//                if (i < firstCenterTimeslots.size() && i < insuredList.size()) {
-//                    firstCenter.makeReservation(firstCenterTimeslots.get(i));
-//                    new Reservation(insuredList.get(i)).setReservation(firstCenterTimeslots.get(i), firstCenter);
-//                }
-//                if (i < secondCenterTimeslots.size() && i+4 < insuredList.size()) {
-//                    secondCenter.makeReservation(secondCenterTimeslots.get(i));
-//                    new Reservation(insuredList.get(i+4)).setReservation(secondCenterTimeslots.get(i), secondCenter);
-//                }
-//            }
-//        }
+        secondCenterReservations.add(reservation5);
+        secondCenterReservations.add(reservation6);
+        secondCenterReservations.add(reservation7);
+        secondCenterReservations.add(reservation8);
+
+        secondCenter.setReservationList(firstCenterReservations);
+
+        reservation5.setReservation(secondCenterTimeslotsList.get(0), secondCenter);
+        reservation6.setReservation(secondCenterTimeslotsList.get(1), secondCenter);
+        reservation7.setReservation(secondCenterTimeslotsList.get(2), secondCenter);
+        reservation8.setReservation(secondCenterTimeslotsList.get(3), secondCenter);
 
         // Displaying the reserved timeslots for verification
         System.out.println("Reservations at First Center:");
         firstCenter.printBookedTimeslots();
-        //System.out.println("Reservations at Second Center:");
-        //secondCenter.printBookedTimeslots();
+        System.out.println("------------------------------------------------");
+        System.out.println("Reservations at Second Center:");
+        secondCenter.printBookedTimeslots();
 
         System.out.println("-------------------------------------------------------------------");
 
@@ -109,6 +111,24 @@ public class Main {
         System.out.println("Second Center:");
         secondCenter.printAvailableTimeslots();
 
+        //na emfanizei ta ranteboy toy giatroy
+        //doctorsList.get(0).setPerDoctorTimeslots(firstCenter);
+        //doctorsList.get(0).printReservedTimeslots();
+
+
+        System.out.println();
+        System.out.println();
+
+        doctorsList.get(0).makeAVaccination(insuredList.get(0),LocalDate.now());
+        doctorsList.get(0).makeAVaccination(insuredList.get(1),LocalDate.now());
+        doctorsList.get(0).printAllVacinations();
+
+        System.out.println("Those people are over 60 and they didn t book an appointment! ");
+        for(Insured ins : insuredList){
+            if(!ins.isVaccinated() && ins.getAge()>=60){
+                System.out.println(ins);
+            }
+        }
 
     }
 
